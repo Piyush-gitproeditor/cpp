@@ -1,41 +1,63 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Person{
-    private:
+
+class Employee {
+private:
     string name;
-    int age;
-    public:
-    void setname(string n){
-        name =n;
+    int empID;
+
+public:
+    void setEmployee(string n, int id) {
+        name = n;
+        empID = id;
     }
-    string getname(){
-        return name;
-    }
-    void setage(int a){
-        age=a;
-    }
-    int getage(){
-        return age;
-    }
-    void displayperson(){
-        cout<<"the name and age of the person is :"<<endl;
+
+    void displayEmployee() {
+        cout << "Employee Name: " << name << endl;
+        cout << "Employee ID: " << empID << endl;
     }
 };
-int main(){
-    Person p;
-    p.setname("piyush saini");
-    p.setage(20);
 
-    cout<<"The name of the student is : "<<p.getname()<<endl;
+class Manager : public Employee {
+private:
+    double basicSalary;
+    double bonus;
 
-    cout<<"the age of the student is : "<<p.getage()<<endl;
+public:
+    void setManagerData(double bSalary, double b) {
+        basicSalary = bSalary;
+        bonus = b;
+    }
 
+    double calculateTotalSalary() {
+        return basicSalary + bonus;
+    }
 
+    string performanceLevel() {
+        double total = calculateTotalSalary();
 
+        if (total >= 100000) return "Excellent";
+        else if (total >= 70000) return "Very Good";
+        else if (total >= 50000) return "Good";
+        else return "Average";
+    }
 
+    void display() {
+        displayEmployee();  
+        cout << "Basic Salary: " << basicSalary << endl;
+        cout << "Bonus: " << bonus << endl;
+        cout << "Total Salary: " << calculateTotalSalary() << endl;
+        cout << "Performance: " << performanceLevel() << endl;
+    }
+};
 
+int main() {
+    Manager m;
+
+    m.setEmployee("Piyush", 101);
+    m.setManagerData(60000, 15000);
+
+    m.display();
 
     return 0;
-
 }
-    
