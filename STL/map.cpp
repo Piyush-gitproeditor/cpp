@@ -6,8 +6,10 @@ int main(){
     mpp[2]={11,21};
     mpp[3]={12,22};
     for (auto it: mpp){
-        cout<<it.first<< " "<< it.second.first <<" "<<it.second.second <<" ";
-    }
+    cout << it.first << "  "
+         << it.second.first << " "
+         << it.second.second << "\n";
+}
 
 
 
