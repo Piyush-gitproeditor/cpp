@@ -22,11 +22,17 @@
     {
         "label": "compile and run",
         "type": "shell",
-        "command": "cmd",
+        "command": "powershell.exe",
         "args": [
-            "/c",
-            "g++ -std=c++17 -o \"${fileBasenameNoExtension}.exe\" \"${file}\" && \"${fileDirname}\\${fileBasenameNoExtension}.exe\" < \"${fileDirname}\\input.txt\" > \"${fileDirname}\\output.txt\""
+            "-NoProfile",
+            "-Command",
+            "& { Set-Location -LiteralPath '${fileDirname}'; g++ -std=c++17 -o '${fileBasenameNoExtension}.exe' '${file}'; if ($LASTEXITCODE -eq 0) { Get-Content -LiteralPath 'input.txt' | & '.\\${fileBasenameNoExtension}.exe' | Set-Content -LiteralPath 'output.txt' } }"
         ],
+        "presentation": {
+            "reveal": "always",
+            "panel": "dedicated",
+            "close": true
+        },
         "group": {
             "kind": "build",
             "isDefault": true
